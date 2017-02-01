@@ -14,6 +14,7 @@ end
 num_bank_questions = questions_raw.length
 
 questions_tree = generate_questions_tree(questions_raw)
+#questions are classified in a JSON-like nested array/hash tree to help with evenly drawing from each strand and standard
 
 num_quiz_questions = 0
 while num_quiz_questions <=0
