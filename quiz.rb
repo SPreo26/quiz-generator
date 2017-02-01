@@ -20,6 +20,4 @@ num_quiz_questions = gets.chomp.to_i
 
 questions = draw_questions(questions_tree, num_quiz_questions, num_bank_questions)
 
-questions.each do |question|
-  p question
-end
+p questions.map{|q| q[:question_id]}.join(", ")

@@ -4,16 +4,12 @@ def draw_questions(questions_tree, num_quiz_questions, num_bank_questions)
 
   while num_quiz_questions > 0 
 
-    p num_quiz_questions
     num_bank_questions_left = num_bank_questions
     questions_tree = shuffle_questions_tree(questions_tree)
     questions_tree_work_copy = deep_copy(questions_tree)#deep copy method defined here as clone/dup only makes shallow copy of an hash/array object which doesn't copy nested elements
 
     lambda = -> do
       while num_bank_questions_left > 0
-
-        p "bank q's"
-        p num_bank_questions_left
 
         questions_tree_work_copy.each_with_index do |strand, strand_index|
           standards = strand[:data]
