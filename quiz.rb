@@ -15,8 +15,11 @@ num_bank_questions = questions_raw.length
 
 questions_tree = generate_questions_tree(questions_raw)
 
-p "Please enter the number of questions."
-num_quiz_questions = gets.chomp.to_i
+num_quiz_questions = 0
+while num_quiz_questions <=0
+  p "Please enter the number of questions (greater than 0)."
+  num_quiz_questions = gets.chomp.to_i
+end
 
 questions = draw_questions(questions_tree, num_quiz_questions, num_bank_questions)
 
