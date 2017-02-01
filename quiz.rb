@@ -1,4 +1,8 @@
+require_relative "generate_quetions_tree.rb"
+require_relative "draw_quetions.rb"
+
 questions_raw = []
+
 File.open("questions.csv", "r") do |f|
   f.each_line.with_index do |line, index|
     next if index == 0
@@ -6,58 +10,12 @@ File.open("questions.csv", "r") do |f|
   end
 end
 
-questions_tree = []
+questions_tree = generate_questions_tree(questions_raw)
 
+p "Please enter the number of questions."
+num_questions = gets.chomp.to_i
 
-questions_raw.each do |question|
-
-  matching_strand_index = questions_tree.index{|hash| hash[:strand_id] == question[0]}
-
-  if matching_strand_index
-
-    matching_standard_index = questions_tree[matching_strand_index][:data]
-      .index{|hash| hash[:standard_id] == question[2]}
-
-    if matching_standard_index
-
-      questions_tree[matching_strand_index][:data][matching_standard_index][:data] << {
-          question_id: question[4],
-          difficulty: question[5]
-        }
-
-    else
-
-      questions_tree[matching_strand_index][:data] << {
-        standard_id: question[2],
-        standard_name: question[3],
-        data: [{
-          question_id: question[4],
-          difficulty: question[5]
-        }] 
-      } 
-
-    end
-
-  else
-
-    questions_tree << {
-      strand_id: question[0],
-      strand_name: question[1],
-      data: [{
-        standard_id: question[2],
-        standard_name: question[3],
-        data: [{
-          question_id: question[4],
-          difficulty: question[5]
-        }] 
-      }]
-    } 
-
-  end
-
-end
-
-p questions_tree
+questions = draw_quetions(questions_tree, num_questions)
 
 
 
